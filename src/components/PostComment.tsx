@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import UserAvatar from "./UserAvatar";
 import { Comment, CommentVote, User } from "@prisma/client";
 import { formatTimeToNow } from "@/lib/utils";
 import CommentVotes from "./CommentVotes";
@@ -15,6 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import { CommentRequest } from "@/lib/validators/comment";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
+import { UserAvatar } from "@/components/UserAvatar";
 
 type ExtendedComment = Comment & {
   votes: CommentVote[];
@@ -89,8 +89,8 @@ const PostComment = ({ comment, votesAmt, currentVote, postId }: Props) => {
       <div className="flex gap-2 items-center flex-wrap">
         <CommentVotes
           commentId={comment.id}
-          initialVotesAmt={votesAmt}
-          initialVote={currentVote}
+          votesAmt={votesAmt}
+          currentVote={currentVote}
         />
         <Button
           onClick={() => {
